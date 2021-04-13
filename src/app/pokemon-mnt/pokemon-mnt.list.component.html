@@ -1,0 +1,36 @@
+<po-page-list
+    [p-title]="literals?.pokemonMnt"
+    [p-actions]="pageActions"
+    [p-filter]="filterSettings"
+    [p-breadcrumb]="breadcrumb">
+
+    <div class="po-row">
+      <po-slide [p-slides]="arrayImg" p-height="200"> </po-slide>
+    </div>
+    <div class="po-md-12">
+      <po-switch class="po-pull-right"
+          [p-label]="literals?.showFavorite"
+          [p-label-off]="literals?.no"
+          [p-label-on]="literals?.yes"
+          [(ngModel)]="onlyFavorites"
+          (p-change)="onChangeFavorite()"> </po-switch>
+    </div>
+
+    <div class="po-md-12">
+      <po-table
+        p-selectable="true"
+        p-sort="true"
+        p-striped="true"
+        p-single-select="true"
+        p-hide-select-all="true"
+        [p-columns]="columns"
+        [p-items]="items"
+        [p-actions]="tableActions"
+        (p-selected)="onSelected($event)"
+        (p-unselected)="onUnselected()"
+        [p-show-more-disabled]="!hasNext"
+        (p-show-more)="search(true)"
+      >
+      </po-table>
+    </div>
+</po-page-list>

@@ -1,0 +1,67 @@
+<po-widget
+    class="po-md-12"
+    p-no-shadow="true">
+    <div class="po-row">
+      <po-info class="po-md-6"
+          [p-label]="literals?.pokemonMnt"
+          p-orientation="horizontal"
+          [p-value]="pokemonAbility?.name" >
+      </po-info>
+      <po-info class="po-md-6"
+          [p-label]="literals?.species"
+          p-orientation="horizontal"
+          [p-value]="pokemonAbility?.species.name" >
+      </po-info>
+    </div>
+
+  <po-accordion class="po-md-12">
+    <po-accordion-item *ngFor="let pokemonEncounter of pokemonEncounters" [p-label]="pokemonEncounter?.location_area.name" class="po-md-12">
+      <div>
+        <po-widget>
+          <div>
+            <po-divider
+                [p-label]="literals?.versionDetails">
+            </po-divider>
+            <div class="po-row" *ngFor="let versionDetail of pokemonEncounter.version_details">
+              <po-info class="po-md-3"
+                  [p-label]="literals?.encounterMaxPercentual"
+                  p-orientation="horizontal"
+                  [p-value]="versionDetail?.max_chance" >
+              </po-info>
+              <p> </p>
+              <po-info class="po-md-3"
+                  [p-label]="literals?.version"
+                  p-orientation="horizontal"
+                  [p-value]="versionDetail?.version.name" >
+              </po-info>
+
+              <div class="po-row" *ngFor="let encounterDetail of versionDetail.encounter_details">
+                <po-info class="po-md-3"
+                    [p-label]="literals?.chanceMaxPercentual"
+                    p-orientation="horizontal"
+                    [p-value]="encounterDetail?.chance" >
+                </po-info>
+                <p> </p>
+                <po-info class="po-md-3"
+                    [p-label]="literals?.method"
+                    p-orientation="horizontal"
+                    [p-value]="encounterDetail?.method.name" >
+                </po-info>
+                <po-info class="po-md-3"
+                    [p-label]="literals?.minLevel"
+                    p-orientation="horizontal"
+                    [p-value]="encounterDetail?.min_level" >
+                </po-info>
+                <po-info class="po-md-3"
+                    [p-label]="literals?.maxLevel"
+                    p-orientation="horizontal"
+                    [p-value]="encounterDetail?.max_level" >
+                </po-info>
+              </div>
+            </div>
+          </div>
+        </po-widget>
+      </div>
+    </po-accordion-item>
+  </po-accordion>
+</po-widget>
