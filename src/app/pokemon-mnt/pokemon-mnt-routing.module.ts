@@ -10,10 +10,6 @@ const routes: Routes = [
       component: PokemonMntListComponent
     },
     {
-        path: 'new',
-        component: PokemonMntDetailComponent
-    },
-    {
         path: 'detail/:id',
         component: PokemonMntDetailComponent
     }

@@ -53,10 +53,18 @@ export class PokemonMntDetailComponent implements OnInit, OnDestroy {
 
     }
 
+    /**
+     * Método que retorna para página inicial
+     *
+     */
     private back(): void {
         this.router.navigate(['./pokemonMnt']);
     }
 
+    /**
+     * Método que dispara a consulta do id no serviço para retornar o pokemon recebido como parâmetro
+     *
+     */
     private get(): void {
         const id =  parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 10);
         if (id) {
@@ -78,7 +86,11 @@ export class PokemonMntDetailComponent implements OnInit, OnDestroy {
         }
     }
 
-    private update(): void {
+    /**
+     * Método que salva o pokemon favoritado no serviço e no localStorage
+     *
+     */
+    private setFavorite(): void {
       if (this.service.oldPokemonAbility.indexOf(this.pokemonAbility.id) === -1) {
         this.service.oldPokemonAbility.push(this.pokemonAbility.id);
       }
@@ -86,23 +98,37 @@ export class PokemonMntDetailComponent implements OnInit, OnDestroy {
 
     }
 
-    /*Método para controle de storage*/
+    /**
+     * Método que controla o localStorage (remove e cria novamente)
+     *
+     * @param key string
+     * @param value string
+     */
     private setLocalStorage(key: string, value: string): void {
       localStorage.removeItem(key);
       localStorage.setItem(key, value);
     }
 
+    /**
+     * Método que inicia alguns objetos utilizados pelo HTML e pelo componente
+     *
+     */
     private setupComponents(): void {
 
         this.breadcrumb = this.breadcrumbControlService.getBreadcrumb();
 
+        // Ações da tela
         this.detailActions = [
-            { label: this.literals['favorite'], icon: 'po-icon-like', action: this.update.bind(this, this.pokemonAbility)},
+            { label: this.literals['favorite'], icon: 'po-icon-like', action: this.setFavorite.bind(this, this.pokemonAbility)},
             { label: this.literals['back'], action: this.back.bind(this) }
         ];
 
     }
 
+    /**
+     * Método que elimina a assinatura do serviço utilizado durante a execução
+     *
+     */
     ngOnDestroy(): void {
       this.itemsSubscription$.unsubscribe();
     }

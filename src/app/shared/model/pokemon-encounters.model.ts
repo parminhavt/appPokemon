@@ -1,6 +1,10 @@
+/**
+ * Interface e Modelo referentes a encontrdos dod Pokemons, classe principal
+ * que utiliza outras 2 para formalizar o modelo
+ */
+
 import { IPokemonMnt } from './pokemon-mnt.model';
 import { IVersionDetails } from './version-details.model';
-
 
 export interface IPokemonEncounters {
     location_area: IPokemonMnt;
@@ -9,27 +13,22 @@ export interface IPokemonEncounters {
 
 export class PokemonEncounters implements IPokemonEncounters {
 
-    // tslint:disable-next-line:variable-name
     location_area: IPokemonMnt;
-    // tslint:disable-next-line:variable-name
     version_details: Array<IVersionDetails>;
 
     constructor(values: object = {}) {
         Object.assign(this, values);
     }
 
-    // tslint:disable-next-line:typedef
-    static of(json: any = {}) {
+    static of(json: any = {}): any {
         return new PokemonEncounters(json);
     }
 
-    // tslint:disable-next-line:typedef
-    static empty() {
+    static empty(): any {
         return new PokemonEncounters();
     }
 
-    // tslint:disable-next-line:typedef
-    static fromJson(json: Array<any> = []) {
+    static fromJson(json: Array<any> = []): any {
 
         const items: Array<IPokemonEncounters> = [];
 

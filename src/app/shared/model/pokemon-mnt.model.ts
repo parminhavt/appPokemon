@@ -1,3 +1,7 @@
+/**
+ * Interface e modelo referentes aos pokemons
+ */
+
 export interface IPokemonMnt {
     name: string;
     url: string;
@@ -12,36 +16,15 @@ export class PokemonMnt implements IPokemonMnt {
         Object.assign(this, values);
     }
 
-    public get $name(): string {
-        return this.name;
-    }
-
-    public get $url(): string {
-      return this.url;
-  }
-
-    // tslint:disable-next-line:adjacent-overload-signatures
-    public set $name(name: string) {
-      this.name = name;
-  }
-
-    // tslint:disable-next-line:adjacent-overload-signatures
-    public set $url(url: string) {
-        this.url = url;
-    }
-
-    // tslint:disable-next-line:typedef
-    static of(json: any = {}) {
+    static of(json: any = {}): any {
         return new PokemonMnt(json);
     }
 
-    // tslint:disable-next-line:typedef
-    static empty() {
+    static empty(): any {
         return new PokemonMnt();
     }
 
-    // tslint:disable-next-line:typedef
-    static fromJson(json: Array<any> = []) {
+    static fromJson(json: Array<any> = []): any {
 
         const items: Array<IPokemonMnt> = [];
 

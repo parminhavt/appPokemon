@@ -1,3 +1,8 @@
+/**
+ * Interface e Modelo referentes as versões dos encontros de Pokemon
+ * Este modelo é utilizado pelo pokemon-encounter.model.ts
+ */
+
 import { IPokemonMnt } from './pokemon-mnt.model';
 import { IEncountersDetail } from './encounter-details.model';
 
@@ -9,9 +14,7 @@ export interface IVersionDetails {
 
 export class VersionDetails implements IVersionDetails {
 
-  // tslint:disable-next-line:variable-name
   encounter_details: Array<IEncountersDetail>;
-  // tslint:disable-next-line:variable-name
   max_chance: number;
   version: IPokemonMnt;
 
@@ -19,18 +22,15 @@ export class VersionDetails implements IVersionDetails {
         Object.assign(this, values);
     }
 
-    // tslint:disable-next-line:typedef
-    static of(json: any = {}) {
+    static of(json: any = {}): any {
         return new VersionDetails(json);
     }
 
-    // tslint:disable-next-line:typedef
-    static empty() {
+    static empty(): any {
         return new VersionDetails();
     }
 
-    // tslint:disable-next-line:typedef
-    static fromJson(json: Array<any> = []) {
+    static fromJson(json: Array<any> = []): any {
 
         const items: Array<IVersionDetails> = [];
 

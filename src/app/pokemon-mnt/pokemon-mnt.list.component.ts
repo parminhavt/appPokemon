@@ -1,16 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import {forkJoin,  Subscription} from 'rxjs';
+
 import {
     PoBreadcrumb,
     PoPageAction, PoTableColumn,
     PoI18nService, PoI18nPipe, PoNotificationService, PoPageFilter
 } from '@po-ui/ng-components';
 
-import {forkJoin,  Subscription} from 'rxjs';
-
 import { Response } from '../shared/interfaces/response.interface';
-
 import { IPokemonMnt } from '../shared/model/pokemon-mnt.model';
 import { PokemonMntService } from '../shared/services/pokemon-mnt.service';
 import { BreadcrumbControlService } from 'dts-backoffice-util';
@@ -74,7 +73,12 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
         });
     }
 
-    /*Método que busca os dados da table*/
+    /**
+     * Método que busca as informações sobre habilidades/nome dos pokemons
+     *
+     * @param loadMore boolean
+     * @return Um array do tipo IPokemonAbility com as habilidades do pokemon
+     */
     search(loadMore = false): void {
 
         this.items = [];
@@ -101,7 +105,11 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
             });
     }
 
-    /*Método que chama tela de detalhe*/
+    /**
+     * Método que chama a tela de detalhe dos pokemons via método catchInformation
+     *
+     * @param row any
+     */
     private detail(row: any): void {
         if (this.selectedItem !== 0) {
           this.catchInformation(this.selectedItem);
@@ -110,6 +118,12 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Método que salva as informações no localstorage e chama a rota de detalhe
+     * passando o id como parâmetro
+     *
+     * @param id number
+     */
     private catchInformation(id: number): void {
       // Armazena no localStorage o registro selecionado
       this.items.forEach((fields: IPokemonAbility) => {
@@ -120,12 +134,22 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
       this.router.navigate(['/pokemonMnt/detail', id]);
     }
 
-    /*Método para controle de storage*/
+    /**
+     * Método que controla o localStorage (remove e cria novamente)
+     *
+     * @param key string
+     * @param value string
+     */
     private setLocalStorage(key: string, value: string): void {
       localStorage.removeItem(key);
       localStorage.setItem(key, value);
     }
 
+    /**
+     * Método que monta o filtro por nome e chama a query (search)
+     *
+     * @param filter string
+     */
     private filter(filter: string): void {
 
       if (filter && filter.trim() !== '') {
@@ -145,6 +169,11 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
 
     }
 
+    /**
+     * Método que armazena os pokemons favoritos no localStorage
+     *
+     * @param row any
+     */
     private setFavorite(row: any): void {
       if (this.service.oldPokemonAbility.indexOf(row.id) === -1) {
         this.service.oldPokemonAbility.push(row.id);
@@ -153,18 +182,30 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
       this.setLocalStorage('pokemon-favorite', this.service.oldPokemonAbility.toString());
     }
 
-    /*Quando a linha da table é selecionada chama este método*/
+    /**
+     * Método chamado quando algum registro é selecionado na table
+     *
+     * @param row any
+     */
     public onSelected(row: any): void {
         this.selectedItem = row.id;
         this.pageActions[0].disabled = false;
     }
 
-    /*Quando a linha da table é desmarcada chama este método*/
+    /**
+     * Método chamado quando algum registro é deselecionado na table
+     *
+     */
     public onUnselected(): void {
       this.selectedItem = 0;
       this.pageActions[0].disabled = true;
     }
 
+    /**
+     * Método chamado pelo switch da tela quando o status é alterado,
+     * ele busca pelos favoritos ou faz uma consulta padrão chamando o search
+     *
+     */
     public onChangeFavorite(): void {
       if (this.service.oldPokemonAbility.length > 0 && this.onlyFavorites) {
 
@@ -188,6 +229,11 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
       }
     }
 
+    /**
+     * Método chamado pelo botão de "limpar favoritos" da tela
+     * ele limpa os objetos e faz uma consulta padrão chamando o search
+     *
+     */
     public emptyFavorites(): void {
       this.service.oldPokemonAbility = [];
       this.pageActions[1].disabled = true;
@@ -195,7 +241,10 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
       this.search();
     }
 
-    /*Método que inicia os objetos utilizados durante a execução*/
+    /**
+     * Método que inicia alguns objetos utilizados pelo HTML e pelo componente
+     *
+     */
     private setupComponents(): void {
 
       // Gerando o caminho da tela
@@ -219,11 +268,11 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
         }
       ];
 
+      // Array que armazena as ações da table
       this.tableActions = [
         { action: this.detail.bind(this), label: this.literals['viewPokemonMnt'], icon: 'po-icon-more' },
-        { action: this.setFavorite.bind(this), label: this.literals['favorite'], icon: 'po-icon-like' },
-
-    ];
+        { action: this.setFavorite.bind(this), label: this.literals['favorite'], icon: 'po-icon-like' }
+      ];
 
       // Array de colunas apresentadas na table
       this.columns = [
@@ -236,6 +285,7 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
 
       ];
 
+      // Habilita ou desabilita a ação de favoritar da table
       if (this.service.oldPokemonAbility.length > 0) {
         this.pageActions[1].disabled = false;
       } else {
@@ -244,7 +294,10 @@ export class PokemonMntListComponent implements OnInit, OnDestroy {
 
     }
 
-    /*Método que elimina a assinatura do serviço*/
+    /**
+     * Método que elimina a assinatura do serviço utilizado durante a execução
+     *
+     */
     ngOnDestroy(): void {
         this.itemsSubscription$.unsubscribe();
     }

@@ -1,4 +1,10 @@
+/**
+ * Interface e Modelo referentes as informações de encontros dos Pokemons, usados pelo objeto
+ * version_details no modelo de encontros (pokemon-encounters.model.ts)
+ */
+
 import { IPokemonMnt } from './pokemon-mnt.model';
+
 export interface IEncountersDetail {
     chance: number;
     max_level: number;
@@ -9,28 +15,23 @@ export interface IEncountersDetail {
 export class EncountersDetail implements IEncountersDetail {
 
     chance: number;
-    // tslint:disable-next-line:variable-name
     max_level: number;
     method: IPokemonMnt;
-    // tslint:disable-next-line:variable-name
     min_level: number;
 
     constructor(values: object = {}) {
         Object.assign(this, values);
     }
 
-    // tslint:disable-next-line:typedef
-    static of(json: any = {}) {
+    static of(json: any = {}): any {
         return new EncountersDetail(json);
     }
 
-    // tslint:disable-next-line:typedef
-    static empty() {
+    static empty(): any {
         return new EncountersDetail();
     }
 
-    // tslint:disable-next-line:typedef
-    static fromJson(json: Array<any> = []) {
+    static fromJson(json: Array<any> = []): any {
 
         const items: Array<IEncountersDetail> = [];
 

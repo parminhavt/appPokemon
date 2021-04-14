@@ -1,10 +1,13 @@
+/**
+ * Interface e Modelo referente as habilidades dos pokemons
+ */
+
 import { IPokemonMnt } from './pokemon-mnt.model';
 
 export interface IPokemonAbility {
     id: number;
     abilities: Array<IPokemonMnt>;
     base_experience: number;
-    forms: Array<IPokemonMnt>;
     height: number;
     weight: number;
     name: string;
@@ -16,9 +19,7 @@ export class PokemonAbility implements IPokemonAbility {
 
     id: number;
     abilities: Array<IPokemonMnt>;
-    // tslint:disable-next-line:variable-name
     base_experience: number;
-    forms: Array<IPokemonMnt>;
     height: number;
     weight: number;
     name: string;
@@ -29,18 +30,15 @@ export class PokemonAbility implements IPokemonAbility {
         Object.assign(this, values);
     }
 
-    // tslint:disable-next-line:typedef
-    static of(json: any = {}) {
+    static of(json: any = {}): any {
         return new PokemonAbility(json);
     }
 
-    // tslint:disable-next-line:typedef
-    static empty() {
+    static empty(): any {
         return new PokemonAbility();
     }
 
-    // tslint:disable-next-line:typedef
-    static fromJson(json: Array<any> = []) {
+    static fromJson(json: Array<any> = []): any {
 
         const items: Array<IPokemonAbility> = [];
 
