@@ -7,11 +7,11 @@ describe('PokemonMntListComponent', () => {
     let component: PokemonMntListComponent;
     let fixture: ComponentFixture<PokemonMntListComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(async () => {
         TestBed.configureTestingModule({
             declarations: [PokemonMntListComponent]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PokemonMntListComponent);

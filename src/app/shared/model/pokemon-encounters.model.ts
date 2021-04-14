@@ -13,7 +13,9 @@ export interface IPokemonEncounters {
 
 export class PokemonEncounters implements IPokemonEncounters {
 
+    // tslint:disable-next-line:variable-name
     location_area: IPokemonMnt;
+    // tslint:disable-next-line:variable-name
     version_details: Array<IVersionDetails>;
 
     constructor(values: object = {}) {

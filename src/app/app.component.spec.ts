@@ -6,7 +6,7 @@ import { PoMenuModule, PoPageModule, PoToolbarModule } from '@po-ui/ng-component
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [
         PoMenuModule,
@@ -18,7 +18,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
     }).compileComponents();
-  }));
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

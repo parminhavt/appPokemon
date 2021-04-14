@@ -7,11 +7,11 @@ describe('PokemonMntDetailComponent', () => {
     let component: PokemonMntDetailComponent;
     let fixture: ComponentFixture<PokemonMntDetailComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(async () => {
         TestBed.configureTestingModule({
             declarations: [PokemonMntDetailComponent]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PokemonMntDetailComponent);

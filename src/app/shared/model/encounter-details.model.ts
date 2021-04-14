@@ -15,8 +15,10 @@ export interface IEncountersDetail {
 export class EncountersDetail implements IEncountersDetail {
 
     chance: number;
+    // tslint:disable-next-line:variable-name
     max_level: number;
     method: IPokemonMnt;
+    // tslint:disable-next-line:variable-name
     min_level: number;
 
     constructor(values: object = {}) {

@@ -14,7 +14,9 @@ export interface IVersionDetails {
 
 export class VersionDetails implements IVersionDetails {
 
+  // tslint:disable-next-line:variable-name
   encounter_details: Array<IEncountersDetail>;
+  // tslint:disable-next-line:variable-name
   max_chance: number;
   version: IPokemonMnt;
 

@@ -40,8 +40,7 @@ export class AppComponent{
     item.type = 'default';
   }
 
-  // tslint:disable-next-line:typedef
-  public goTo(url: string) {
+  public goTo(url: string): void {
       // Reinicia o BreadCrumb
       this.breadcrumbControlService.newBreadcrumb();
 

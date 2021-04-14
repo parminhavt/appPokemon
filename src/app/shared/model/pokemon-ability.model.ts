@@ -19,6 +19,7 @@ export class PokemonAbility implements IPokemonAbility {
 
     id: number;
     abilities: Array<IPokemonMnt>;
+    // tslint:disable-next-line:variable-name
     base_experience: number;
     height: number;
     weight: number;
