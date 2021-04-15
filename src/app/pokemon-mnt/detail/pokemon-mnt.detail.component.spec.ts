@@ -1,5 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { PoI18nPipe, PoI18nService } from '@po-ui/ng-components';
 import { PokemonMntDetailComponent } from './pokemon-mnt.detail.component';
 
 describe('PokemonMntDetailComponent', () => {
@@ -9,7 +11,9 @@ describe('PokemonMntDetailComponent', () => {
 
     beforeEach(async () => {
         TestBed.configureTestingModule({
-            declarations: [PokemonMntDetailComponent]
+            imports: [RouterTestingModule],
+            declarations: [PokemonMntDetailComponent],
+            providers: [PoI18nPipe, PoI18nService]
         }).compileComponents();
     });
 
@@ -19,7 +23,4 @@ describe('PokemonMntDetailComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
 });
