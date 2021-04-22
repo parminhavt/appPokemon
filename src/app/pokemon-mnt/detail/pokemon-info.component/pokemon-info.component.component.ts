@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PoI18nService, PoTableColumn } from '@po-ui/ng-components';
 import { forkJoin } from 'rxjs';
+import { PokemonAbility } from '../../../shared/model/pokemon-ability.model';
 
 @Component({
   selector: 'app-pokemon-info-component',
@@ -10,7 +11,7 @@ import { forkJoin } from 'rxjs';
 export class AppPokemonInfoComponent implements OnInit {
 
   @Input() pokemonEncounters;
-  @Input() pokemonAbility;
+  @Input() pokemonAbility = new PokemonAbility();
 
   tableColumns: Array<PoTableColumn>;
 
